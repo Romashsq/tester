@@ -1,33 +1,51 @@
 # OOP
-
+import random
 class Student:
-    group = 'B2910'
-    def __init__(self, name, age):
+    def __init__(self, name):
         self.name = name
-        self.age = age
+        self.alive = True
+        self.progress = 0
+        self.gladness=50
+    def to_study(self):
+        print('Time to study')
+        self.progress += 0.12
+        self.gladness -= 3
+    def to_sleep(self):
+        print('I will sleep')
+        self.gladness += 3
+    def to_chill(self):
+        print('Rest time')
+        self.progress -= 0.1
+        self.gladness += 5
 
+    def is_alive(self):
+        if self.progress < -0.5:
+            print('Cast out...')
+            self.alive = False
+        elif self.gladness <= 0:
+            print('Depression')
+            self.alive = False
+        elif self.progress > 5:
+            print('Passed externally...')
+            self.alive = False
+    def end_of_day(self):
+        print(f'Glagness = {self.gladness}')
+        print(f'Progress = {round(self.progress, 2)}')
+    def live(self,day):
+        day = 'Day ' + str(day) + ' of ' + self.name + ' live'
+        print(f"{day:=^50}")
+        live_cube = random.randint(1, 3 )
+        if live_cube == 1:
+            self.to_study()
+        elif live_cube == 2 :
+            self.to_sleep()
+        elif live_cube == 3:
+            self.to_chill()
+        self.end_of_day()
+        self.is_alive()
+nick = Student(name='Nick')
 
-stud1 = Student(name='Oleg', age=18)
-print(stud1.name)
-print(stud1.age)
-print(stud1.group)
-stud2 = Student(name='Dima', age=12)
-print(stud2.name)
-print(stud2.age)
-print(stud2.group)
-
-print(Student.group)
-
-Student.group = 'V2910'
-
-print(Student.group)
-print(stud1.group)
-print(stud2.group)
-stud1.group = 'B2911'
-print(stud1.group)
-print(Student.group)
-print(stud2.group)
-stud2.group = '3910'
-print(stud2.group)
-stud3 = Student(name='Anna', age=17)
-print(stud3.group)
+for day in range(365):
+    if nick.alive == False:
+        break
+    nick.live(day)
