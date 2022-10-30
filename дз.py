@@ -69,7 +69,7 @@ class Student:
     def live(self,day):
         day = 'Day ' + str(day) + ' of ' + self.name + ' live'
         print(f"{day:=^50}")
-        live_cube = random.randint(1, 3)
+        live_cube = random.randint(1, 4)
         if live_cube == 1:
             self.to_study()
         elif live_cube == 2:
